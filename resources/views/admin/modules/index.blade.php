@@ -7,6 +7,7 @@
     @forelse($modules as $m)
     <tr>
       <td><input type="checkbox" name="ids[]" value="{{ $m->id }}"></td>
+      <td>{{ $loop->iteration }}</td>
       <td style="font-weight:600">{{ $m->name }}</td>
       <td>{{ $m->subject->name ?? '—' }}</td>
       <td>{{ $m->subject->course->name ?? '—' }}</td>
@@ -15,7 +16,7 @@
       <td style="white-space:nowrap">
         <a href="{{ route('admin.modules.edit',$m) }}" class="btn btn-sm btn-outline">Edit</a>
         <form method="POST" action="{{ route('admin.modules.destroy',$m) }}" style="display:inline" onsubmit="return confirm('Delete?')">
-          @csrf @method('DELETE') <button class="btn btn-sm btn-danger">Del</button>
+          @csrf @method('DELETE') <button class="btn btn-sm btn-danger">Delete</button>
         </form>
       </td>
     </tr>

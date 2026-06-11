@@ -7,6 +7,7 @@
     @forelse($semesters as $s)
     <tr>
       <td><input type="checkbox" name="ids[]" value="{{ $s->id }}"></td>
+      <td>{{ $loop->iteration }}</td>
       <td style="font-weight:600">{{ $s->name }}</td>
       <td>{{ $s->course->name ?? '—' }}</td>
       <td>{{ $s->order }}</td>
@@ -14,7 +15,7 @@
       <td style="white-space:nowrap">
         <a href="{{ route('admin.semesters.edit',$s) }}" class="btn btn-sm btn-outline">Edit</a>
         <form method="POST" action="{{ route('admin.semesters.destroy',$s) }}" style="display:inline" onsubmit="return confirm('Delete?')">
-          @csrf @method('DELETE') <button class="btn btn-sm btn-danger">Del</button>
+          @csrf @method('DELETE') <button class="btn btn-sm btn-danger">Delete</button>
         </form>
       </td>
     </tr>

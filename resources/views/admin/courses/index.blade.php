@@ -20,6 +20,7 @@
     @forelse($courses as $c)
     <tr>
       <td><input type="checkbox" name="ids[]" value="{{ $c->id }}"></td>
+      <td>{{ $loop->iteration }}</td>
       <td>
         <div style="font-weight:600">{{ $c->name }}</div>
         @if($c->name_bn)<div style="font-size:11px;color:#718096">{{ $c->name_bn }}</div>@endif

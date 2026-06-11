@@ -11,6 +11,7 @@
     @forelse($batches as $b)
     <tr>
       <td><input type="checkbox" name="ids[]" value="{{ $b->id }}"></td>
+      <td>{{ $loop->iteration }}</td>
       <td><div style="font-weight:600">{{ $b->name }}</div>@if($b->name_bn)<div style="font-size:11px;color:#9ca3af">{{ $b->name_bn }}</div>@endif</td>
       <td>{{ $b->course->name ?? '—' }}</td>
       <td>{{ $b->semester->name ?? '—' }}</td>
@@ -19,7 +20,7 @@
       <td style="white-space:nowrap">
         <a href="{{ route('admin.batches.edit',$b) }}" class="btn btn-sm btn-outline">Edit</a>
         <form method="POST" action="{{ route('admin.batches.destroy',$b) }}" style="display:inline" onsubmit="return confirm('Delete?')">
-          @csrf @method('DELETE') <button class="btn btn-sm btn-danger">Del</button>
+          @csrf @method('DELETE') <button class="btn btn-sm btn-danger">Delete</button>
         </form>
       </td>
     </tr>

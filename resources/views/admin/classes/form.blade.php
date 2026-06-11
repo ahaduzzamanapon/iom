@@ -38,7 +38,12 @@
       <div class="form-group" id="zoom-wrap"><label class="form-label">Zoom Link</label><input type="url" name="zoom_link" class="form-control" value="{{ old('zoom_link',($class ?? null)?->zoom_link??'') }}"></div>
       
       <div class="form-group" id="scheduled-wrap"><label class="form-label">Scheduled At</label><input type="datetime-local" name="scheduled_at" class="form-control" value="{{ old('scheduled_at',($class ?? null)?->scheduled_at?->format('Y-m-d\TH:i')??'') }}"></div>
-      <div class="form-group" id="duration-wrap" style="display:none"><label class="form-label">Duration (minutes)</label><input type="number" name="duration_mins" class="form-control" value="{{ old('duration_mins', 60) }}" min="1"></div>
+      
+      {{-- FIXED DURATION WRAPPER AND INPUT VALUE --}}
+      <div class="form-group" id="duration-wrap" style="display: {{ old('type', ($class ?? null)?->type ?? '') === 'live' ? 'block' : 'none' }}">
+          <label class="form-label">Duration (minutes)</label>
+          <input type="number" name="duration_mins" class="form-control" value="{{ old('duration_mins', ($class ?? null)?->duration_mins ?? 60) }}" min="1">
+      </div>
       
       <div class="form-group" id="file-wrap"><label class="form-label">File (PDF/Doc)</label><input type="file" name="file_path" class="form-control"></div>
       <div class="form-group" style="display:flex;align-items:center;gap:8px;margin-top:24px">
@@ -92,4 +97,3 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 @endpush
 @endsection
-
