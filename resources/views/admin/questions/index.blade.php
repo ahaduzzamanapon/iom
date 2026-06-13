@@ -30,6 +30,7 @@
     @forelse($questions as $q)
     <tr>
       <td><input type="checkbox" name="ids[]" value="{{ $q->id }}"></td>
+      <td>{{ $loop->iteration }}</td>
       <td style="max-width:200px;font-size:13px">{{ Str::limit($q->question_text, 70) }}</td>
       <td style="font-size:12px">{{ $q->exam->title ?? '—' }}</td>
       <td style="font-size:12px">{{ $q->subject->name ?? '—' }}</td>
@@ -48,7 +49,7 @@
           </form>
         @endif
         <form method="POST" action="{{ route('admin.questions.destroy',$q) }}" style="display:inline" onsubmit="return confirm('Delete?')">
-          @csrf @method('DELETE') <button class="btn btn-sm btn-danger">Del</button>
+          @csrf @method('DELETE') <button class="btn btn-sm btn-danger">Delete</button>
         </form>
       </td>
     </tr>

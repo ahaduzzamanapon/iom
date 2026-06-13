@@ -43,6 +43,7 @@
     @forelse($students as $s)
     <tr>
       <td><input type="checkbox" name="ids[]" value="{{ $s->id }}"></td>
+      <td>{{ $loop->iteration }}</td>
       <td><span style="font-family:monospace;font-weight:600;color:#1a5276">{{ $s->student_id }}</span></td>
       <td>
         <div style="font-weight:600">{{ $s->user->name ?? '—' }}</div>

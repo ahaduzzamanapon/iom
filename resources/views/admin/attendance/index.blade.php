@@ -32,6 +32,7 @@
     @forelse($records as $r)
     <tr>
       <td><input type="checkbox" name="ids[]" value="{{ $r->id }}"></td>
+      <td>{{ $loop->iteration }}</td>
       <td>{{ $r->student->name ?? '—' }}</td>
       <td>{{ $r->batch->name ?? '—' }}</td>
       <td style="font-size:12px">{{ $r->classLesson->title ?? '—' }}</td>

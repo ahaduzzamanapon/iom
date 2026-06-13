@@ -43,7 +43,7 @@
             </td>
             <td style="padding:10px 16px">
               <form method="POST" action="{{ route('admin.routines.destroy',$r) }}" onsubmit="return confirm('Delete?')">
-                @csrf @method('DELETE') <button class="btn btn-sm btn-danger">Del</button>
+                @csrf @method('DELETE') <button class="btn btn-sm btn-danger">Delete</button>
               </form>
             </td>
           </tr>

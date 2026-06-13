@@ -10,6 +10,7 @@
     @forelse($exams as $e)
     <tr>
       <td><input type="checkbox" name="ids[]" value="{{ $e->id }}"></td>
+      <td>{{ $loop->iteration }}</td>
       <td style="font-weight:600">{{ $e->title }}</td>
       <td style="font-size:12px">{{ $e->batch->name ?? '—' }}<div style="color:#9ca3af">{{ $e->batch->course->name ?? '' }}</div></td>
       <td style="font-size:12px">{{ $e->subject->name ?? '—' }}</td>
@@ -25,7 +26,7 @@
         <div style="display:flex;gap:6px">
           <a href="{{ route('teacher.exams.questions.assign',$e) }}" class="btn btn-sm btn-success">⚙ Manage</a>
           <form method="POST" action="{{ route('teacher.exams.destroy',$e) }}" onsubmit="return confirm('Delete?')" style="display:inline">
-            @csrf @method('DELETE') <button class="btn btn-sm btn-danger">Del</button>
+            @csrf @method('DELETE') <button class="btn btn-sm btn-danger">Delete</button>
           </form>
         </div>
       </td>

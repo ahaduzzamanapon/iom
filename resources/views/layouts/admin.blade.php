@@ -358,12 +358,21 @@ select.form-control{appearance:none}
   var btn     = document.getElementById('sidebarToggle');
   var sidebar = document.querySelector('.sidebar');
   var overlay = document.getElementById('sidebarOverlay');
+  
   function open()  { sidebar.classList.add('open'); btn.classList.add('open'); overlay.classList.add('active'); }
   function close() { sidebar.classList.remove('open'); btn.classList.remove('open'); overlay.classList.remove('active'); }
+  
   btn.addEventListener('click', function(){ sidebar.classList.contains('open') ? close() : open(); });
   overlay.addEventListener('click', close);
-  // close on nav item click (mobile UX)
+  
   document.querySelectorAll('.nav-item').forEach(function(a){ a.addEventListener('click', close); });
+
+  window.addEventListener('DOMContentLoaded', function() {
+    var activeItem = document.querySelector('.sidebar .nav-item.active');
+    if (activeItem) {
+      activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  });
 })();
 </script>
 </body>

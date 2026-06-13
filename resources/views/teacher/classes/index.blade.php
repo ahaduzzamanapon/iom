@@ -25,6 +25,7 @@
     @forelse($classes as $c)
     <tr>
       <td><input type="checkbox" name="ids[]" value="{{ $c->id }}"></td>
+      <td>{{ $loop->iteration }}</td>
       <td>
         <div style="font-weight:600">{{ $c->title }}</div>
         <div style="font-size:11px;color:#9ca3af">{{ $c->module->subject->name ?? '' }}</div>
@@ -72,7 +73,7 @@
       </td>
       <td>
         <form method="POST" action="{{ route('teacher.classes.destroy',$c) }}" onsubmit="return confirm('Delete?')">
-          @csrf @method('DELETE') <button class="btn btn-sm btn-danger">Del</button>
+          @csrf @method('DELETE') <button class="btn btn-sm btn-danger">Delete</button>
         </form>
       </td>
     </tr>
