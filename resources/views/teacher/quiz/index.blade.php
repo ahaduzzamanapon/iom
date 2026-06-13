@@ -43,7 +43,7 @@
               <a href="{{ route('teacher.quiz.show', $q) }}" class="btn btn-sm btn-primary">Manage</a>
               <form method="POST" action="{{ route('teacher.quiz.destroy', $q) }}">
                 @csrf @method('DELETE')
-                <button class="btn btn-sm btn-danger" onclick="return confirm('Delete?')">Del</button>
+                <button class="btn btn-sm btn-danger" onclick="return confirm('Delete?')">Delete</button>
               </form>
             </td>
           </tr>

@@ -10,13 +10,14 @@
     @forelse($notices as $n)
     <tr>
       <td><input type="checkbox" name="ids[]" value="{{ $n->id }}"></td>
+      <td>{{ $loop->iteration }}</td>
       <td style="font-weight:600">{{ $n->title }}</td>
       <td><span class="badge badge-blue">{{ ucfirst($n->type) }}</span></td>
       <td>{{ ucfirst($n->visible_to) }}</td>
       <td style="font-size:12px">{{ $n->expires_at ? \Carbon\Carbon::parse($n->expires_at)->format('d M Y') : '—' }}</td>
       <td>
         <form method="POST" action="{{ route('teacher.notices.destroy',$n) }}" onsubmit="return confirm('Delete?')">
-          @csrf @method('DELETE') <button class="btn btn-sm btn-danger">Del</button>
+          @csrf @method('DELETE') <button class="btn btn-sm btn-danger">Delete</button>
         </form>
       </td>
     </tr>

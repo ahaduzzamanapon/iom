@@ -43,7 +43,7 @@ class LiveClassController extends Controller
     public function create()
     {
         $batches = Batch::whereIn('id', $this->myBatchIds())->where('status', 'active')->with('course')->get();
-        $modules = Module::whereIn('subject_id', $this->mySubjectIds())->where('status', 'active')->with('subject')->get();
+        $modules = Module::whereIn('subject_id', $this->mySubjectIds())->with('subject')->get();
         return view('teacher.classes.live-class', compact('batches', 'modules'));
     }
 
