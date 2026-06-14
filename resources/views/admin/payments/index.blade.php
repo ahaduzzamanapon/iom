@@ -40,6 +40,7 @@
     @forelse($payments as $p)
     <tr>
       <td><input type="checkbox" name="ids[]" value="{{ $p->id }}"></td>
+      <td>{{ $loop->iteration }}</td>
       <td style="font-family:monospace;font-size:12px">{{ $p->invoice_number }}</td>
       <td>{{ $p->student->name ?? '—' }}</td>
       <td>৳{{ number_format($p->amount) }}</td>

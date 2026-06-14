@@ -11,6 +11,7 @@
     @forelse($fees as $f)
     <tr>
       <td><input type="checkbox" name="ids[]" value="{{ $f->id }}"></td>
+      <td>{{ $loop->iteration }}</td>
       <td style="font-weight:600">{{ $f->title }}</td>
       <td>{{ $f->course->name ?? '—' }}</td>
       <td><span class="badge badge-blue">{{ ucfirst($f->type) }}</span></td>
@@ -19,7 +20,7 @@
       <td style="white-space:nowrap">
         <a href="{{ route('admin.fee-structures.edit',$f) }}" class="btn btn-sm btn-outline">Edit</a>
         <form method="POST" action="{{ route('admin.fee-structures.destroy',$f) }}" style="display:inline" onsubmit="return confirm('Delete?')">
-          @csrf @method('DELETE') <button class="btn btn-sm btn-danger">Del</button>
+          @csrf @method('DELETE') <button class="btn btn-sm btn-danger">Delete</button>
         </form>
       </td>
     </tr>

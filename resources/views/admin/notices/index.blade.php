@@ -11,6 +11,7 @@
     @forelse($notices as $n)
     <tr>
       <td><input type="checkbox" name="ids[]" value="{{ $n->id }}"></td>
+      <td>{{ $loop->iteration }}</td>
       <td style="font-weight:600">{{ $n->title }}</td>
       <td><span class="badge badge-blue">{{ ucfirst($n->scope) }}</span>
         @if($n->batch) <span style="font-size:11px;color:#9ca3af">→ {{ $n->batch->name }}</span> @endif

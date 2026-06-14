@@ -19,6 +19,7 @@
     @forelse($certificates as $c)
     <tr>
       <td><input type="checkbox" name="ids[]" value="{{ $c->id }}"></td>
+      <td>{{ $loop->iteration }}</td>
       <td style="font-family:monospace;font-weight:600;font-size:12px">{{ $c->certificate_number }}</td>
       <td>
         <div style="font-weight:600">{{ $c->student->name ?? '—' }}</div>

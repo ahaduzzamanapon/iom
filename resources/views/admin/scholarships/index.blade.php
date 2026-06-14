@@ -11,6 +11,7 @@
     @forelse($scholarships as $s)
     <tr>
       <td><input type="checkbox" name="ids[]" value="{{ $s->id }}"></td>
+      <td>{{ $loop->iteration }}</td>
       <td>
         <div style="font-weight:600">{{ $s->student->name ?? '—' }}</div>
         <div style="font-size:11px;color:#9ca3af">{{ $s->student->studentProfile->student_id ?? '' }}</div>
@@ -34,7 +35,7 @@
           </form>
         @endif
         <form method="POST" action="{{ route('admin.scholarships.destroy',$s) }}" style="display:inline" onsubmit="return confirm('Delete?')">
-          @csrf @method('DELETE') <button class="btn btn-sm btn-danger">Del</button>
+          @csrf @method('DELETE') <button class="btn btn-sm btn-danger">Delete</button>
         </form>
       </td>
     </tr>
