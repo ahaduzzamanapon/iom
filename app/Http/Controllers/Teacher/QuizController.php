@@ -67,6 +67,47 @@ class QuizController extends Controller
         return view('teacher.quiz.show', compact('quiz'));
     }
 
+    public function edit(QuizRoom $quiz)
+    {
+        // Only the creator can edit
+        if ($quiz->created_by !== auth()->id()) {
+            abort(403);
+        }
+
+        $batches = Batch::where('status', 'active')->with('course')->get();
+        return view('teacher.quiz.edit', compact('quiz', 'batches'));
+    }
+
+    public function update(Request $request, QuizRoom $quiz)
+    {
+        if ($quiz->created_by !== auth()->id()) {
+            abort(403);
+        }
+
+        $data = $request->validate([
+            'title'            => 'required|string|max:255',
+            'description'      => 'nullable|string',
+            'batch_id'         => 'nullable|exists:batches,id',
+            'duration_minutes' => 'required|integer|min:1',
+            'starts_at'        => 'nullable|date',
+            'ends_at'          => 'nullable|date|after_or_equal:starts_at',
+            'status'           => 'required|in:draft,active,closed',
+        ]);
+
+        // Restrict: if batch_id provided, it must be teacher's own batch
+        if (!empty($data['batch_id'])) {
+            $myBatchIds = \App\Models\Batch::whereHas('subjects', fn($q) =>
+                $q->where('batch_subjects.teacher_id', auth()->id())
+            )->pluck('id')->toArray();
+            abort_if(!in_array($data['batch_id'], $myBatchIds), 403, 'You are not assigned to this batch.');
+        }
+
+        $quiz->update($data);
+
+        return redirect()->route('teacher.quiz.index')
+            ->with('success', 'Quiz room সফলভাবে আপডেট করা হয়েছে।');
+    }
+
     public function destroy(QuizRoom $quiz)
     {
         if ($quiz->created_by !== auth()->id()) {
@@ -110,6 +151,12 @@ class QuizController extends Controller
     public function destroyQuestion(QuizRoom $quiz, int $questionId)
     {
         if ($quiz->created_by !== auth()->id()) abort(403);
+        
+        // Prevent modifying questions after students have started attempting
+        if ($quiz->attempts()->count() > 0) {
+            return back()->with('error', 'ছাত্ররা ইতিমধ্যে Quiz শুরু করেছে, এখন প্রশ্ন বাদ দেওয়া যাবে না।');
+        }
+
         $quiz->questions()->findOrFail($questionId)->delete();
         return back()->with('success', 'Question মুছে ফেলা হয়েছে।');
     }

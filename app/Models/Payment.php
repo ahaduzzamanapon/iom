@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Payment extends Model
 {
@@ -19,5 +20,10 @@ class Payment extends Model
     public function getDueAmountAttribute(): float
     {
         return max(0, ($this->amount - $this->discount) - $this->paid_amount);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

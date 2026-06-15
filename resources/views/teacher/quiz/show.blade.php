@@ -2,6 +2,7 @@
 @section('title', 'Manage Quiz Room')
 @section('page-title', 'Quiz Management')
 @section('content')
+
 <div class="page-header">
   <div>
     <div class="page-title">🎯 Manage: {{ $quiz->title }}</div>
@@ -12,7 +13,7 @@
 
 <div class="form-grid" style="grid-template-columns:1fr 2fr;align-items:start">
   
-  {{-- Left column: Quiz details --}}
+  {{-- Left column: Quiz details & Add Question --}}
   <div style="display:flex;flex-direction:column;gap:20px">
     <div class="card">
       <div class="card-header">
@@ -46,42 +47,49 @@
           @csrf
           <div class="form-group">
             <label class="form-label" for="question">Question Text *</label>
-            <input type="text" name="question" id="question" class="form-control" required placeholder="প্রশ্ন লিখুন...">
+            <input type="text" name="question" id="question" class="form-control" required placeholder="প্রশ্ন লিখুন..." value="{{ old('question') }}">
+            @error('question') <span style="color:#dc2626;font-size:12px;display:block;margin-top:4px">{{ $message }}</span> @enderror
           </div>
           
           <div class="form-group">
             <label class="form-label" for="option_a">Option A *</label>
-            <input type="text" name="option_a" id="option_a" class="form-control" required placeholder="অপশন এ">
+            <input type="text" name="option_a" id="option_a" class="form-control" required placeholder="অপশন এ" value="{{ old('option_a') }}">
+            @error('option_a') <span style="color:#dc2626;font-size:12px;display:block;margin-top:4px">{{ $message }}</span> @enderror
           </div>
           
           <div class="form-group">
             <label class="form-label" for="option_b">Option B *</label>
-            <input type="text" name="option_b" id="option_b" class="form-control" required placeholder="অপশন বি">
+            <input type="text" name="option_b" id="option_b" class="form-control" required placeholder="অপশন বি" value="{{ old('option_b') }}">
+            @error('option_b') <span style="color:#dc2626;font-size:12px;display:block;margin-top:4px">{{ $message }}</span> @enderror
           </div>
 
           <div class="form-group">
             <label class="form-label" for="option_c">Option C</label>
-            <input type="text" name="option_c" id="option_c" class="form-control" placeholder="অপশন সি (ঐচ্ছিক)">
+            <input type="text" name="option_c" id="option_c" class="form-control" placeholder="অপশন সি (ঐচ্ছিক)" value="{{ old('option_c') }}">
+            @error('option_c') <span style="color:#dc2626;font-size:12px;display:block;margin-top:4px">{{ $message }}</span> @enderror
           </div>
 
           <div class="form-group">
             <label class="form-label" for="option_d">Option D</label>
-            <input type="text" name="option_d" id="option_d" class="form-control" placeholder="অপশন ডি (ঐচ্ছিক)">
+            <input type="text" name="option_d" id="option_d" class="form-control" placeholder="অপশন ডি (ঐচ্ছিক)" value="{{ old('option_d') }}">
+            @error('option_d') <span style="color:#dc2626;font-size:12px;display:block;margin-top:4px">{{ $message }}</span> @enderror
           </div>
 
           <div class="form-grid" style="grid-template-columns:1fr 1fr">
             <div class="form-group">
               <label class="form-label" for="correct_option">Correct *</label>
               <select name="correct_option" id="correct_option" class="form-control" required>
-                <option value="a">A</option>
-                <option value="b">B</option>
-                <option value="c">C</option>
-                <option value="d">D</option>
+                <option value="a" {{ old('correct_option') == 'a' ? 'selected' : '' }}>A</option>
+                <option value="b" {{ old('correct_option') == 'b' ? 'selected' : '' }}>B</option>
+                <option value="c" {{ old('correct_option') == 'c' ? 'selected' : '' }}>C</option>
+                <option value="d" {{ old('correct_option') == 'd' ? 'selected' : '' }}>D</option>
               </select>
+              @error('correct_option') <span style="color:#dc2626;font-size:12px;display:block;margin-top:4px">{{ $message }}</span> @enderror
             </div>
             <div class="form-group">
               <label class="form-label" for="marks">Marks *</label>
-              <input type="number" name="marks" id="marks" class="form-control" value="1" min="1" required>
+              <input type="number" name="marks" id="marks" class="form-control" value="{{ old('marks', 1) }}" min="1" required>
+              @error('marks') <span style="color:#dc2626;font-size:12px;display:block;margin-top:4px">{{ $message }}</span> @enderror
             </div>
           </div>
 
@@ -94,7 +102,20 @@
   {{-- Right column: Questions & Attempts --}}
   <div style="display:flex;flex-direction:column;gap:20px">
     
-    {{-- Questions --}}
+    {{-- Alerts Container --}}
+    @if(session('success'))
+      <div style="background:#def7ec; color:#03543f; padding:12px 16px; border-radius:6px; font-size:14px; font-weight:600">
+        🎉 {{ session('success') }}
+      </div>
+    @endif
+
+    @if(session('error'))
+      <div style="background:#fde8e8; color:#9b1c1c; padding:12px 16px; border-radius:6px; font-size:14px; font-weight:600">
+        ⚠️ {{ session('error') }}
+      </div>
+    @endif
+
+    {{-- Questions List --}}
     <div class="card">
       <div class="card-header">
         <div class="card-title">Questions ({{ $quiz->questions->count() }})</div>
@@ -118,13 +139,14 @@
                 @endif
               </div>
             </div>
-            <form method="POST" action="{{ route('teacher.quiz.questions.destroy', [$quiz, $q->id]) }}">
-              @csrf @method('DELETE')
-              <button class="btn btn-sm btn-danger" style="padding:4px 8px" onclick="return confirm('Delete this question?')">✕</button>
+            <form method="POST" action="{{ route('teacher.quiz.questions.destroy', [$quiz, $q->id]) }}" style="margin:0">
+              @csrf 
+              @method('DELETE')
+              <button type="submit" class="btn btn-sm btn-danger" style="padding:4px 8px" onclick="return confirm('Delete this question?')">✕</button>
             </form>
           </div>
         @empty
-          <div style="padding:30px;text-align:center;color:#9ca3af;font-size:13px">কোনো question যোগ করা হয়নি। পাশের ফর্ম থেকে যোগ করুন।</div>
+          <div style="padding:30px;text-align:center;color:#9ca3af;font-size:13px">কোনো question যোগ করা হয়নি। পাশের ফর্ম থেকে যোগ করুন।</div>
         @endforelse
       </div>
     </div>
@@ -148,7 +170,7 @@
             <tbody>
               @forelse($quiz->attempts as $att)
               <tr>
-                <td><strong>{{ $att->user->name }}</strong></td>
+                <td><strong>{{ $att->user->name ?? 'Unknown Student' }}</strong></td>
                 <td>{{ $att->score }} / {{ $att->total }}</td>
                 <td>
                   @php

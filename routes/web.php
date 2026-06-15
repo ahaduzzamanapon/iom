@@ -133,11 +133,21 @@ Route::prefix('teacher')->name('teacher.')->middleware(['auth', 'role:teacher'])
     Route::delete('live-class/{lesson}', [\App\Http\Controllers\Teacher\LiveClassController::class, 'destroy'])->name('live-class.destroy');
     Route::resource('notices', \App\Http\Controllers\Teacher\NoticeController::class);
     // Teacher Quiz Management (QZ-01)
+    
+    // ─── Quiz Room CRUD ─────────────────────────────────────────────
     Route::get('quiz', [\App\Http\Controllers\Teacher\QuizController::class, 'index'])->name('quiz.index');
     Route::get('quiz/create', [\App\Http\Controllers\Teacher\QuizController::class, 'create'])->name('quiz.create');
     Route::post('quiz', [\App\Http\Controllers\Teacher\QuizController::class, 'store'])->name('quiz.store');
     Route::get('quiz/{quiz}', [\App\Http\Controllers\Teacher\QuizController::class, 'show'])->name('quiz.show');
+    Route::get('quiz/{quiz}/edit', [\App\Http\Controllers\Teacher\QuizController::class, 'edit'])->name('quiz.edit');
+    Route::put('quiz/{quiz}', [\App\Http\Controllers\Teacher\QuizController::class, 'update'])->name('quiz.update');
     Route::delete('quiz/{quiz}', [\App\Http\Controllers\Teacher\QuizController::class, 'destroy'])->name('quiz.destroy');
+
+    // ─── Quiz Questions Management ──────────────────────────────────
+    Route::post('quiz/{quiz}/questions', [\App\Http\Controllers\Teacher\QuizController::class, 'storeQuestion'])->name('quiz.questions.store');
+    Route::delete('quiz/{quiz}/questions/{questionId}', [\App\Http\Controllers\Teacher\QuizController::class, 'destroyQuestion'])->name('quiz.questions.destroy');
+
+
 });
 
 // ─── Student Routes ────────────────────────────────────────────────

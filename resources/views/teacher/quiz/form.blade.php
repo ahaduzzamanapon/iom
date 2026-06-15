@@ -2,6 +2,7 @@
 @section('title', 'New Quiz Room')
 @section('page-title', 'Quiz Management')
 @section('content')
+
 <div class="page-header">
   <div>
     <div class="page-title">🎯 New Quiz Room</div>
@@ -21,13 +22,13 @@
       <div class="form-group">
         <label class="form-label" for="title">Title *</label>
         <input type="text" name="title" id="title" class="form-control" required value="{{ old('title') }}" placeholder="যেমন: Fiqh Taharah Quiz 1">
-        @error('title') <span style="color:#dc2626;font-size:12px">{{ $message }}</span> @enderror
+        @error('title') <span style="color:#dc2626;font-size:12px;margin-top:4px;display:block">{{ $message }}</span> @enderror
       </div>
 
       <div class="form-group">
         <label class="form-label" for="description">Description</label>
         <textarea name="description" id="description" class="form-control" rows="3" placeholder="কুইজের নির্দেশনা...">{{ old('description') }}</textarea>
-        @error('description') <span style="color:#dc2626;font-size:12px">{{ $message }}</span> @enderror
+        @error('description') <span style="color:#dc2626;font-size:12px;margin-top:4px;display:block">{{ $message }}</span> @enderror
       </div>
 
       <div class="form-grid">
@@ -37,17 +38,17 @@
             <option value="">সকল ব্যাচ (Public)</option>
             @foreach($batches as $b)
               <option value="{{ $b->id }}" {{ old('batch_id') == $b->id ? 'selected' : '' }}>
-                {{ $b->course->name }} - {{ $b->name }}
+                {{ $b->course->name ?? '' }} - {{ $b->name }}
               </option>
             @endforeach
           </select>
-          @error('batch_id') <span style="color:#dc2626;font-size:12px">{{ $message }}</span> @enderror
+          @error('batch_id') <span style="color:#dc2626;font-size:12px;margin-top:4px;display:block">{{ $message }}</span> @enderror
         </div>
 
         <div class="form-group">
           <label class="form-label" for="duration_minutes">Duration (Minutes) *</label>
           <input type="number" name="duration_minutes" id="duration_minutes" class="form-control" required min="1" value="{{ old('duration_minutes', 30) }}">
-          @error('duration_minutes') <span style="color:#dc2626;font-size:12px">{{ $message }}</span> @enderror
+          @error('duration_minutes') <span style="color:#dc2626;font-size:12px;margin-top:4px;display:block">{{ $message }}</span> @enderror
         </div>
       </div>
 
@@ -55,13 +56,13 @@
         <div class="form-group">
           <label class="form-label" for="starts_at">Starts At</label>
           <input type="datetime-local" name="starts_at" id="starts_at" class="form-control" value="{{ old('starts_at') }}">
-          @error('starts_at') <span style="color:#dc2626;font-size:12px">{{ $message }}</span> @enderror
+          @error('starts_at') <span style="color:#dc2626;font-size:12px;margin-top:4px;display:block">{{ $message }}</span> @enderror
         </div>
 
         <div class="form-group">
           <label class="form-label" for="ends_at">Ends At</label>
           <input type="datetime-local" name="ends_at" id="ends_at" class="form-control" value="{{ old('ends_at') }}">
-          @error('ends_at') <span style="color:#dc2626;font-size:12px">{{ $message }}</span> @enderror
+          @error('ends_at') <span style="color:#dc2626;font-size:12px;margin-top:4px;display:block">{{ $message }}</span> @enderror
         </div>
       </div>
 

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Attendance extends Model
 {
@@ -13,4 +14,8 @@ class Attendance extends Model
     public function student()     { return $this->belongsTo(User::class, 'student_id'); }
     public function batch()       { return $this->belongsTo(Batch::class); }
     public function markedBy()    { return $this->belongsTo(User::class, 'marked_by'); }
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }
