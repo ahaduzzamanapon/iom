@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Notice extends Model
 {
+    use \App\Traits\Trackable;
     protected $fillable = ['created_by', 'title', 'body', 'scope', 'batch_id', 'course_id', 'is_published', 'published_at'];
     protected $casts    = ['is_published' => 'boolean', 'published_at' => 'datetime'];
 

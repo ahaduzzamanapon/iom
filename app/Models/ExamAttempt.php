@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ExamAttempt extends Model
 {
+    use \App\Traits\Trackable;
     protected $fillable = [
         'exam_id', 'student_id', 'started_at', 'submitted_at',
         'obtained_marks', 'percentage', 'gpa', 'grade', 'status', 'answer_script', 'feedback'

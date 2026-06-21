@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Scholarship extends Model
 {
+    use \App\Traits\Trackable;
     protected $fillable = [
         'student_id','title','discount_amount','discount_percent','reason','status','approved_by','approved_at'
     ];

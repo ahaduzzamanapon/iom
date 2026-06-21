@@ -7,13 +7,26 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Attendance extends Model
 {
+    use \App\Traits\Trackable;
     protected $fillable = ['class_lesson_id', 'student_id', 'batch_id', 'date', 'status', 'marked_by'];
     protected $casts    = ['date' => 'date'];
 
-    public function classLesson() { return $this->belongsTo(ClassLesson::class); }
-    public function student()     { return $this->belongsTo(User::class, 'student_id'); }
-    public function batch()       { return $this->belongsTo(Batch::class); }
-    public function markedBy()    { return $this->belongsTo(User::class, 'marked_by'); }
+    public function classLesson()
+    {
+        return $this->belongsTo(ClassLesson::class);
+    }
+    public function student()
+    {
+        return $this->belongsTo(User::class, 'student_id');
+    }
+    public function batch()
+    {
+        return $this->belongsTo(Batch::class);
+    }
+    public function markedBy()
+    {
+        return $this->belongsTo(User::class, 'marked_by');
+    }
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

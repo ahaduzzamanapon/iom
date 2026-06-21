@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ClassProgress extends Model
 {
+    use \App\Traits\Trackable;
     protected $fillable = ['student_id', 'class_lesson_id', 'is_completed', 'completed_at'];
     protected $casts    = ['is_completed' => 'boolean', 'completed_at' => 'datetime'];
 

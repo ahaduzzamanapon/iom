@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Result extends Model
 {
+    use \App\Traits\Trackable;
     protected $fillable = ['student_id', 'semester_id', 'batch_id', 'cgpa', 'overall_grade', 'is_published', 'published_at'];
     protected $casts    = ['is_published' => 'boolean', 'published_at' => 'datetime'];
 

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AcademicCalendar extends Model
 {
+    use \App\Traits\Trackable;
     protected $fillable = [
         'course_id', 'semester_id', 'title', 'type',
         'start_date', 'end_date', 'description', 'is_published', 'created_by',

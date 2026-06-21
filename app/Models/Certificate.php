@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Certificate extends Model
 {
+    use \App\Traits\Trackable;
     protected $fillable = ['student_id', 'course_id', 'certificate_number', 'qr_code', 'file_path', 'issued_date'];
     protected $casts    = ['issued_date' => 'date'];
 

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class StudentSemesterPromotion extends Model
 {
+    use \App\Traits\Trackable;
     protected $fillable = [
         'user_id','from_semester_id','to_semester_id','promoted_by','status','remarks','promoted_at'
     ];

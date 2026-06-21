@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class QuizAttempt extends Model
 {
+    use \App\Traits\Trackable;
     protected $fillable = ['quiz_room_id', 'user_id', 'score', 'total', 'submitted_at'];
 
     protected $casts = ['submitted_at' => 'datetime'];

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class StudentProfile extends Model
 {
+    use \App\Traits\Trackable;
     protected $fillable = [
         'user_id', 'student_id', 'phone', 'date_of_birth', 'gender',
         'address', 'photo', 'guardian_name', 'guardian_phone', 'guardian_relation', 'status'

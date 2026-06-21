@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ClassLesson extends Model
 {
+    use \App\Traits\Trackable;
     protected $fillable = [
         'module_id', 'batch_id', 'title', 'title_bn', 'type',
         'youtube_url', 'file_path', 'meet_link', 'zoom_link',

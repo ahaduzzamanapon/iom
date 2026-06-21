@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Routine extends Model
 {
+    use \App\Traits\Trackable;
     protected $fillable = ['batch_id','subject_id','teacher_id','day','start_time','end_time','room','type'];
 
     public function batch()   { return $this->belongsTo(Batch::class); }

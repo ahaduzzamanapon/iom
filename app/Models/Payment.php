@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Payment extends Model
 {
+    use \App\Traits\Trackable;
     protected $fillable = [
         'student_id', 'fee_structure_id', 'invoice_number', 'amount', 'discount',
         'paid_amount', 'payment_method', 'transaction_id', 'status', 'due_date', 'paid_at', 'recorded_by'

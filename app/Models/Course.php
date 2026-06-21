@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
+    use \App\Traits\Trackable;
     protected $fillable = ['name', 'name_bn', 'type', 'duration_years', 'description', 'thumbnail', 'status'];
 
     public function semesters()   { return $this->hasMany(Semester::class); }

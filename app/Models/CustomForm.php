@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 
 class CustomForm extends Model
 {
+    use \App\Traits\Trackable;
     protected $fillable = [
         'created_by', 'title', 'description', 'slug', 'is_active', 'closes_at',
     ];

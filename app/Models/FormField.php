@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class FormField extends Model
 {
+    use \App\Traits\Trackable;
     protected $fillable = [
         'custom_form_id', 'label', 'type', 'options', 'required', 'order',
     ];

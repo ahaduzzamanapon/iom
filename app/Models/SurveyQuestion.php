@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SurveyQuestion extends Model
 {
+    use \App\Traits\Trackable;
     protected $fillable = [
         'survey_id', 'question_key', 'label', 'type', 'options', 'default_next_question_key', 'is_start', 'required', 'order',
     ];

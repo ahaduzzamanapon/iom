@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Survey extends Model
 {
+    use \App\Traits\Trackable;
     protected $fillable = [
         'created_by', 'title', 'description', 'slug', 'is_active', 'closes_at',
     ];

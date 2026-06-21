@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SupportTicket extends Model
 {
+    use \App\Traits\Trackable;
     protected $fillable = ['user_id', 'title', 'description', 'category', 'image', 'type', 'status', 'admin_reply', 'replied_by'];
 
     public function user()    { return $this->belongsTo(User::class); }

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class QuizAttemptAnswer extends Model
 {
+    use \App\Traits\Trackable;
     protected $fillable = ['quiz_attempt_id', 'quiz_question_id', 'selected_option', 'is_correct'];
 
     public function attempt()  { return $this->belongsTo(QuizAttempt::class, 'quiz_attempt_id'); }

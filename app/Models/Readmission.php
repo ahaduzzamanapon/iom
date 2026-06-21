@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Readmission extends Model
 {
+    use \App\Traits\Trackable;
     protected $fillable = [
         'user_id', 'course_id', 'batch_id', 'reason',
         'status', 'reviewed_by', 'reviewed_at', 'remarks',

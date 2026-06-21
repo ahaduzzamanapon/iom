@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 
 class QuizRoom extends Model
 {
+    use \App\Traits\Trackable;
     protected $fillable = [
         'created_by', 'batch_id', 'title', 'description',
         'room_code', 'status', 'starts_at', 'ends_at', 'duration_minutes',

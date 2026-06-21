@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AdmissionDocument extends Model
 {
+    use \App\Traits\Trackable;
     protected $fillable = ['admission_id', 'document_type', 'file_path'];
     public function admission() { return $this->belongsTo(Admission::class); }
 }

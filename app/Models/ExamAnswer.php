@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ExamAnswer extends Model
 {
+    use \App\Traits\Trackable;
     protected $fillable = ['exam_attempt_id', 'question_id', 'selected_answer', 'is_correct'];
     protected $casts    = ['is_correct' => 'boolean'];
 

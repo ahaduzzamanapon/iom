@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class BatchTransfer extends Model
 {
+    use \App\Traits\Trackable;
     protected $fillable = [
         'user_id', 'from_batch_id', 'to_batch_id', 'reason',
         'status', 'approved_by', 'transferred_at',

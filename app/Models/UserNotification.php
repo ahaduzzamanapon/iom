@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserNotification extends Model
 {
+    use \App\Traits\Trackable;
     protected $fillable = [
         'user_id', 'type', 'title', 'message', 'action_url', 'is_read', 'read_at',
     ];

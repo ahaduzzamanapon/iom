@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Semester extends Model
 {
+    use \App\Traits\Trackable;
     protected $fillable = ['course_id', 'name', 'name_bn', 'order', 'start_date', 'end_date', 'status'];
 
     public function course()  { return $this->belongsTo(Course::class); }

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Batch extends Model
 {
+    use \App\Traits\Trackable;
     protected $fillable = ['course_id', 'semester_id', 'name', 'name_bn', 'capacity', 'start_date', 'end_date', 'status'];
 
     public function course()      { return $this->belongsTo(Course::class); }

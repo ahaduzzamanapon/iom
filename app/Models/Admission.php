@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Admission extends Model
 {
+    use \App\Traits\Trackable;
     protected $fillable = [
         'course_id', 'user_id', 'applicant_name', 'applicant_email', 'applicant_phone',
         'date_of_birth', 'gender', 'guardian_name', 'guardian_phone', 'address',
