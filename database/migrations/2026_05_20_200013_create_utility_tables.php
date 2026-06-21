@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->foreignId('course_id')->nullable()->constrained()->nullOnDelete();
             $table->boolean('is_published')->default(true);
             $table->timestamp('published_at')->nullable();
+            $table->timestamp('expires_at')->nullable();
             $table->timestamps();
         });
 
