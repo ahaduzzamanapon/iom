@@ -94,13 +94,31 @@ footer{background:#0a1929;color:rgba(255,255,255,.6);text-align:center;padding:2
 footer strong{color:#4fc3f7}
 
 @media(max-width:768px){
-  .hero{padding:100px 5% 40px}
+  .hero{padding: 130px 5% 40px} 
+  
   .hero-inner{grid-template-columns:1fr}
   .hero-image-wrap{display:none}
   .hero h1{font-size:32px}
   .hero-stats{flex-wrap:wrap;gap:20px}
   .admission-inner{grid-template-columns:1fr}
-  nav .nav-links{display:none}
+  
+  nav {
+    flex-direction: column;
+    height: auto;
+    padding: 12px 5%;
+    gap: 12px;
+  }
+  nav .nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    width: 100%;
+  }
+  .btn-nav {
+    padding: 6px 14px;
+    font-size: 13px;
+  }
 }
 </style>
 </head>
